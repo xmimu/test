@@ -53,23 +53,30 @@ def qian(c):
     return s.rstrip("零")
 
 
-def tax_calc(a):
+def tax_calc(a, n=0.03):
     """
-    :param a: 含税金额
+    :param a: 含税金额 n = 0.03 税率
     :return: b: 不含税金额, c: 税额
     """
-    n = 0.03  # 税率
+
     b = a / (n + 1)
     c = b * n
+    print(f'税率: {n}')
+    print(f'税后: {a:.2f}')
+    print(f'税前: {b:.2f}', )
+    print(f'税额: {c:.2f}')
     return f'{b:.2f}, {c:.2f}'
 
 
 def main(argv):
-    cost = float(argv)
-    print(f'{cost:.2f}')
-    print(verbose_price(cost))
-    print(tax_calc(cost))
+    cost = float(argv[1])
+    # print(verbose_price(cost))
+    if len(argv) == 3:
+        n = float(argv[2])
+        tax_calc(cost, n)
+    else:
+        tax_calc(cost)
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(sys.argv)
